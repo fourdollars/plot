@@ -8,7 +8,43 @@
 
 {% block content %}
 <div class="content">
-    Content
+    <div class="planet">
+        <h1>Planets</h1>
+        <dl>
+        {% for planet in planets %}
+        <dt>{{ planet.name }}</dt>
+        <dd>{{ planet.url }}</dd>
+        {% endfor %}
+        </dl>
+        <form method="post" action="/admin">
+            <fieldset>
+                <input type="hidden" name="type" value="planet">
+                <input type="hidden" name="action" value="add">
+                <label>Name</label>
+                <input type="text" name="name">
+                <label>URL</label>
+                <input type="text" name="url">
+                <input type="submit">
+            </fieldset>
+        </form>
+    </div>
+    <div class="category">
+        <h1>Categories</h1>
+        <ul>
+        {% for category in categories %}
+        <li>{{ category.name }}</li>
+        {% endfor %}
+        </ul>
+        <form method="post" action="/admin">
+            <fieldset>
+                <input type="hidden" name="type" value="category">
+                <input type="hidden" name="action" value="add">
+                <label>Name</label>
+                <input type="text" name="name">
+                <input type="submit">
+            </fieldset>
+        </form>
+    </div>
 </div>
 {% endblock %}
 

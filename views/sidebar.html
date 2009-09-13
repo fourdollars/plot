@@ -1,5 +1,5 @@
 <div class="block">
-    <img alt="{{ title }}" src="s/logo.png">
+    <img alt="{{ title|striptags }}" src="s/logo.png">
 </div>
 <div class="block">
     <h3>Last Updated:</h3>
@@ -27,7 +27,7 @@
     <h3>Category:</h3>
     <ul>
         {% for category in categories %}
-        <li><a href="category/{{ category }}">{{ category|capfirst }}</a></li>
+        <li><a href="category/{{ category.name }}">{{ category.name|capfirst }}</a></li>
         {% endfor %}
     </ul>
 </div>
