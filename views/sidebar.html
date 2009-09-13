@@ -1,0 +1,45 @@
+<div class="block">
+    <img alt="{{ title }}" src="s/logo.png">
+</div>
+<div class="block">
+    <h3>Last Updated:</h3>
+    <p>{{ last_updated|default:"None" }}</p>
+    <div>
+        <a href="http://www.planetplanet.org/"><img alt="Planet" src="s/planet.png" width="80" height="15"></a>
+        <a href="feed/atom.xml"><img alt="ATOM 0.3" src="s/atom.gif" width="80" height="15"></a>
+        <br>
+        <a href="feed/rss10.xml"><img alt="RSS 1.0" src="s/rss10.png" width="80" height="15"></a>
+        <a href="feed/rss20.xml"><img alt="RSS 2.0" src="s/rss20.png" width="80" height="15"></a>
+        <br>
+        <a href="feed/foaf.xml"><img alt="FOAF" src="s/foaf.png" width="80" height="15"></a>
+        <a href="feed/opml.xml"><img alt="OPML" src="s/opml.png" width="80" height="15"></a>
+    </div>
+</div>
+<div class="block">
+    <h3>Planetarium:</h3>
+    <ul>
+        {% for planet in planets %}
+        <li><a href="{{ planet.url }}">{{ planet.name }}</a></li>
+        {% endfor %}
+    </ul>
+</div>
+<div class="block">
+    <h3>Category:</h3>
+    <ul>
+        {% for category in categories %}
+        <li><a href="category/{{ category }}">{{ category|capfirst }}</a></li>
+        {% endfor %}
+    </ul>
+</div>
+<div class="block">
+    <a href="/join" id="join">Join Now!</a>
+    <h3>Subscription:</h3>
+    <ul>
+        {% for person in people %}
+        <li>
+        <a href="{{ person.feed }}" title="subscribe"><img alt="(feed)" src="s/feed-icon-10x10.png" width="10" height="10"></a>
+        <a href="{{ person.url }}" title="{{ person.title }}">{{ person.name }}</a>
+        </li>
+        {% endfor %}
+    </ul>
+</div>
