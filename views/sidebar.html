@@ -39,7 +39,11 @@
         {% for feed in feeds %}
         <li>
         <a href="{{ feed.feed }}" title="subscribe"><img alt="(feed)" src="/s/feed-icon-10x10.png" width="10" height="10"></a>
+        {% if feed.url %}
         <a href="{{ feed.url }}" title="{{ feed.title }}">{{ feed.name }}</a>
+        {% else %}
+        <a title="404: not found">{{ feed.name }}</a>
+        {% endif %}
         </li>
         {% endfor %}
     </ul>
