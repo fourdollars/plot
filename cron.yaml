@@ -1,0 +1,8 @@
+cron:
+- description: fetch feed by turn
+  url: /cron/fetch
+  schedule: every 5 minutes
+- description: daily summary mail
+  url: /cron/mail
+  schedule: every day 18:00
+  timezone: Asia/Taipei

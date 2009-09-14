@@ -12,5 +12,8 @@ handlers:
 - url: /admin/.*
   script: admin.py
   login: admin
+- url: /cron/.*
+  script: cron.py
+  login: admin
 - url: /.*
   script: index.py
