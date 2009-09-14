@@ -6,8 +6,6 @@ api_version: 1
 handlers:
 - url: /s
   static_dir: static
-- url: /join
-  script: join.py
 - url: /admin
   script: admin.py
   login: admin

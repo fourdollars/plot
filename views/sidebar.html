@@ -35,10 +35,10 @@
     <a href="/join" id="join">Join Now!</a>
     <h3>Subscription:</h3>
     <ul>
-        {% for person in people %}
+        {% for feed in feeds %}
         <li>
-        <a href="{{ person.feed }}" title="subscribe"><img alt="(feed)" src="s/feed-icon-10x10.png" width="10" height="10"></a>
-        <a href="{{ person.url }}" title="{{ person.title }}">{{ person.name }}</a>
+        <a href="{{ feed.feed }}" title="subscribe"><img alt="(feed)" src="s/feed-icon-10x10.png" width="10" height="10"></a>
+        <a href="{{ feed.url }}" title="{{ feed.title }}">{{ feed.name }}</a>
         </li>
         {% endfor %}
     </ul>

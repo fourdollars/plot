@@ -8,14 +8,14 @@ from models.data import *
 class MainPage(webapp.RequestHandler):
     def get(self):
         path = os.path.join(os.path.dirname(__file__), 'views/index.html')
-        planets = Planet.all()
-        people = People.all()
-        categories = Category.all()
+        categories = Category.all().fetch(1000)
+        feeds = Feed.all().fetch(1000)
+        planets = Planet.all().fetch(1000)
         vars = {
                 'title': 'Planet Linux of Taiwan',
-                'planets': planets,
                 'categories': categories,
-                'people': people,
+                'feeds': feeds,
+                'planets': planets,
                 }
         self.response.out.write(template.render(path, vars))
 

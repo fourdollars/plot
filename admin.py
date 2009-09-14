@@ -9,14 +9,14 @@ from models.data import *
 class Dashboard(webapp.RequestHandler):
     def get(self):
         path = os.path.join(os.path.dirname(__file__), 'views/admin.html')
-        planets = Planet.all()
-        people = People.all()
-        categories = Category.all()
+        categories = Category.all().fetch(1000)
+        feeds = Feed.all().fetch(1000)
+        planets = Planet.all().fetch(1000)
         vars = {
                 'title': 'Dashboard - <a href="/">Planet Linux of Taiwan</a>',
-                'planets': planets,
                 'categories': categories,
-                'people': people,
+                'feeds': feeds,
+                'planets': planets,
                 }
         self.response.out.write(template.render(path, vars))
     def post(self):
@@ -38,6 +38,18 @@ class Dashboard(webapp.RequestHandler):
                     self.redirect('/admin')
                 category = Category(name=name)
                 category.put()
+            elif type == 'feed':
+                name = self.request.get('name')
+                url = self.request.get('url')
+                category = self.request.get('category')
+                if name == None or url == None or category == None:
+                    self.redirect('/admin')
+                query = Category.all()
+                parent = query.filter('name =', category).get()
+                if parent == None:
+                    self.redirect('/admin')
+                feed = Feed(name=name, feed=url, category=parent)
+                feed.put()
             self.redirect('/admin')
         except BadValueError:
             self.redirect('/admin')

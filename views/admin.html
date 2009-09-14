@@ -45,6 +45,30 @@
             </fieldset>
         </form>
     </div>
+    <div class="Feed">
+        <h1>Feeds</h1>
+        <ul>
+        {% for feed in feeds %}
+        <li>{{ feed.name }} - {{ feed.feed }} - {{ feed.category.name }}</li>
+        {% endfor %}
+        </ul>
+        <form method="post" action="/admin">
+            <fieldset>
+                <input type="hidden" name="type" value="feed">
+                <input type="hidden" name="action" value="add">
+                <label>Name</label>
+                <input type="text" name="name">
+                <label>ATOM/RSS Feed</label>
+                <input type="text" name="url">
+                <select name="category">
+                    {% for category in categories %}
+                    <option value="{{category.name}}">{{category.name|capfirst}}</option>
+                    {% endfor %}
+                </select>
+                <input type="submit">
+            </fieldset>
+        </form>
+    </div>
 </div>
 {% endblock %}
 
