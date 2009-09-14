@@ -1,18 +1,18 @@
 <div class="block">
-    <img alt="{{ title|striptags }}" src="s/logo.png">
+    <img alt="{{ title|striptags }}" src="/s/logo.png">
 </div>
 <div class="block">
     <h3>Last Updated:</h3>
     <p>{{ last_updated|default:"None" }}</p>
     <div>
-        <a href="http://www.planetplanet.org/"><img alt="Planet" src="s/planet.png" width="80" height="15"></a>
-        <a href="feed/atom.xml"><img alt="ATOM 0.3" src="s/atom.gif" width="80" height="15"></a>
+        <a href="http://www.planetplanet.org/"><img alt="Planet" src="/s/planet.png" width="80" height="15"></a>
+        <a href="/feed/atom.xml"><img alt="ATOM 0.3" src="/s/atom.gif" width="80" height="15"></a>
         <br>
-        <a href="feed/rss10.xml"><img alt="RSS 1.0" src="s/rss10.png" width="80" height="15"></a>
-        <a href="feed/rss20.xml"><img alt="RSS 2.0" src="s/rss20.png" width="80" height="15"></a>
+        <a href="/feed/rss10.xml"><img alt="RSS 1.0" src="/s/rss10.png" width="80" height="15"></a>
+        <a href="/feed/rss20.xml"><img alt="RSS 2.0" src="/s/rss20.png" width="80" height="15"></a>
         <br>
-        <a href="feed/foaf.xml"><img alt="FOAF" src="s/foaf.png" width="80" height="15"></a>
-        <a href="feed/opml.xml"><img alt="OPML" src="s/opml.png" width="80" height="15"></a>
+        <a href="/feed/foaf.xml"><img alt="FOAF" src="/s/foaf.png" width="80" height="15"></a>
+        <a href="/feed/opml.xml"><img alt="OPML" src="/s/opml.png" width="80" height="15"></a>
     </div>
 </div>
 <div class="block">
@@ -26,8 +26,9 @@
 <div class="block">
     <h3>Category:</h3>
     <ul>
+        <li><a href="/">All</a></li>
         {% for category in categories %}
-        <li><a href="category/{{ category.name }}">{{ category.name|capfirst }}</a></li>
+        <li><a href="/category/{{ category.name }}">{{ category.name|capfirst }}</a></li>
         {% endfor %}
     </ul>
 </div>
@@ -37,7 +38,7 @@
     <ul>
         {% for feed in feeds %}
         <li>
-        <a href="{{ feed.feed }}" title="subscribe"><img alt="(feed)" src="s/feed-icon-10x10.png" width="10" height="10"></a>
+        <a href="{{ feed.feed }}" title="subscribe"><img alt="(feed)" src="/s/feed-icon-10x10.png" width="10" height="10"></a>
         <a href="{{ feed.url }}" title="{{ feed.title }}">{{ feed.name }}</a>
         </li>
         {% endfor %}
