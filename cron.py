@@ -24,8 +24,11 @@ class Cron(webapp.RequestHandler):
             if counter.count >= count:
                 counter.count = 0
         counter.put()
-        feed = feeds.fetch(1, offset=counter.count)
-        self.response.out.write(feed[0].feed)
+        if count > 0:
+            feed = feeds.fetch(1, offset=counter.count)
+            self.response.out.write(feed[0].feed)
+        else:
+            self.response.out.write('None')
     def mail(self):
         pass
 
