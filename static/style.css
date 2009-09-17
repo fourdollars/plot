@@ -3,47 +3,48 @@ body {
     margin: auto;
 }
 
-div.body {
+div#body {
+    width: 84%;
 }
 
-div.header {
+div#header {
 	text-align: right;
     color: #888;
 }
 
-div.content {
+div#content {
+    margin: 1%;
 }
 
-div.footer {
+div#footer {
+    margin: 5px;
+    padding: 10px;
     text-align: center;
     text-decoration: underline;
+    border-top: 2px dashed gray;
 }
 
-div.footer hr {
-    border: 1px dashed gray;
-}
-
-div.sidebar {
+div#sidebar {
+    position:absolute;
+    right: 0px;
 	border-left: 1px solid black;
-    float: right;
-    padding-top: 20px;
-	width: 200px;
+	width: 15%;
 }
 
-div.sidebar div.block {
+div#sidebar div.block {
 	border-bottom: 1px dashed black;
     padding: 0px 5px 5px;
 }
 
-div.sidebar ul {
+div#sidebar ul {
     list-style-type: square;
     padding-left: 2em;
 }
 
-div.sidebar li:hover {
+div#sidebar li:hover {
     color: gray;
 }
 
-a#join {
+div#sidebar a#join {
     float: right;
 }

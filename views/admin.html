@@ -7,67 +7,72 @@
 {% endblock %}
 
 {% block content %}
-<div class="content">
-    <div class="planet">
-        <h1>Planets</h1>
-        <dl>
-        {% for planet in planets %}
-        <dt>{{ planet.name }}</dt>
-        <dd>{{ planet.url }}</dd>
-        {% endfor %}
-        </dl>
-        <form method="post" action="/admin">
-            <fieldset>
-                <input type="hidden" name="type" value="planet">
-                <input type="hidden" name="action" value="add">
-                <label>Name</label>
-                <input type="text" name="name">
-                <label>URL</label>
-                <input type="text" name="url">
-                <input type="submit">
-            </fieldset>
-        </form>
-    </div>
-    <div class="category">
-        <h1>Categories</h1>
+<script type="text/javascript"> $(function() { $("#tabs").tabs(); }); </script>
+<div id="content">
+    <div id="tabs">
         <ul>
-        {% for category in categories %}
-        <li>{{ category.name }}</li>
-        {% endfor %}
+            <li><a href="#tabs-1">Planets</a></li>
+            <li><a href="#tabs-2">Categories</a></li>
+            <li><a href="#tabs-3">Feeds</a></li>
         </ul>
-        <form method="post" action="/admin">
-            <fieldset>
-                <input type="hidden" name="type" value="category">
-                <input type="hidden" name="action" value="add">
-                <label>Name</label>
-                <input type="text" name="name">
-                <input type="submit">
-            </fieldset>
-        </form>
-    </div>
-    <div class="Feed">
-        <h1>Feeds</h1>
-        <ul>
-        {% for feed in feeds %}
-        <li>{{ feed.name }} - {{ feed.feed }} - {{ feed.category.name }}</li>
-        {% endfor %}
-        </ul>
-        <form method="post" action="/admin">
-            <fieldset>
-                <input type="hidden" name="type" value="feed">
-                <input type="hidden" name="action" value="add">
-                <label>Name</label>
-                <input type="text" name="name">
-                <label>ATOM/RSS Feed</label>
-                <input type="text" name="url">
-                <select name="category">
-                    {% for category in categories %}
-                    <option value="{{category.name}}">{{category.name|capfirst}}</option>
-                    {% endfor %}
-                </select>
-                <input type="submit">
-            </fieldset>
-        </form>
+        <div id="tabs-1">
+            <dl>
+                {% for planet in planets %}
+                <dt>{{ planet.name }}</dt>
+                <dd>{{ planet.url }}</dd>
+                {% endfor %}
+            </dl>
+            <form method="post" action="/admin">
+                <fieldset>
+                    <input type="hidden" name="type" value="planet">
+                    <input type="hidden" name="action" value="add">
+                    <label>Name</label>
+                    <input type="text" name="name">
+                    <label>URL</label>
+                    <input type="text" name="url">
+                    <input type="submit">
+                </fieldset>
+            </form>
+        </div>
+        <div id="tabs-2">
+            <ul>
+                {% for category in categories %}
+                <li>{{ category.name }}</li>
+                {% endfor %}
+            </ul>
+            <form method="post" action="/admin">
+                <fieldset>
+                    <input type="hidden" name="type" value="category">
+                    <input type="hidden" name="action" value="add">
+                    <label>Name</label>
+                    <input type="text" name="name">
+                    <input type="submit">
+                </fieldset>
+            </form>
+        </div>
+        <div id="tabs-3">
+            <ul>
+                {% for feed in feeds %}
+                <li>{{ feed.name }} - {{ feed.feed }} - {{ feed.category.name }}</li>
+                {% endfor %}
+            </ul>
+            <form method="post" action="/admin">
+                <fieldset>
+                    <input type="hidden" name="type" value="feed">
+                    <input type="hidden" name="action" value="add">
+                    <label>Name</label>
+                    <input type="text" name="name">
+                    <label>ATOM/RSS Feed</label>
+                    <input type="text" name="url">
+                    <select name="category">
+                        {% for category in categories %}
+                        <option value="{{category.name}}">{{category.name|capfirst}}</option>
+                        {% endfor %}
+                    </select>
+                    <input type="submit">
+                </fieldset>
+            </form>
+        </div>
     </div>
 </div>
 {% endblock %}
