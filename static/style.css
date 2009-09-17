@@ -19,7 +19,7 @@ div.footer {
     text-decoration: underline;
 }
 
-.footer hr {
+div.footer hr {
     border: 1px dashed gray;
 }
 
@@ -30,17 +30,17 @@ div.sidebar {
 	width: 200px;
 }
 
-.sidebar div.block {
+div.sidebar div.block {
 	border-bottom: 1px dashed black;
     padding: 0px 5px 5px;
 }
 
-.sidebar ul {
+div.sidebar ul {
     list-style-type: square;
     padding-left: 2em;
 }
 
-.sidebar li:hover {
+div.sidebar li:hover {
     color: gray;
 }
 
