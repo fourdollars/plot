@@ -1,19 +1,21 @@
 body {
 	background-color: #ffd;
-    margin: auto;
+    margin: 0px 200px 0px 0px;
 }
 
-div#body {
-    width: 84%;
-}
-
-div#header {
+div#header h1.site {
 	text-align: right;
     color: #888;
 }
 
-div#content {
-    margin: 1%;
+div.daygroup, div.dashboard {
+    margin: 20px;
+}
+
+h2.date {
+    font-weight: bold;
+    color: gray;
+    border-bottom: 1px dashed gray;
 }
 
 div#footer {
@@ -21,14 +23,17 @@ div#footer {
     padding: 10px;
     text-align: center;
     text-decoration: underline;
-    border-top: 2px dashed gray;
+    border-top: 1px dashed gray;
 }
 
 div#sidebar {
     position:absolute;
+    margin: 0px;
+    padding: 0px;
+    top: 0px;
     right: 0px;
 	border-left: 1px solid black;
-	width: 15%;
+	width: 200px;
 }
 
 div#sidebar div.block {

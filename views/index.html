@@ -1,21 +1,9 @@
 {% extends "layout.html" %}
 
-{% block title %} {{title}} {% endblock %}
+{% block header %}{% include "header.html" %}{% endblock %}
 
-{% block header %}
-{% include "header.html" %}
-{% endblock %}
+{% block content %}{% include "content.html" %}{% endblock %}
 
-{% block content %}
-<div class="content">
-    Content
-</div>
-{% endblock %}
+{% block footer %}{% include "footer.html" %}{% endblock %}
 
-{% block footer %}
-{% include "footer.html" %}
-{% endblock %}
-
-{% block sidebar %}
-{% include "sidebar.html" %}
-{% endblock %}
+{% block sidebar %}{% include "sidebar.html" %}{% endblock %}
