@@ -1,21 +1,20 @@
 {% extends "layout.html" %}
 
-{% block title %} {{title}} {% endblock %}
-
-{% block header %}
-{% include "header.html" %}
-{% endblock %}
+{% block header %}{% include "header.html" %}{% endblock %}
 
 {% block content %}
-<div class="content">
-    Content
+<div id="join">
+    <form method="post" enctype="multipart/form-data" action="/join">
+        <fieldset>
+            <label>Name</label> <input type="text" name="name">
+            <label>RSS/ATOM</label> <input type="text" name="feed">
+            <label>Avatar</label> <input type="file" name="avatar">
+            <input type="submit">
+        </fieldset>
+    </form>
 </div>
 {% endblock %}
 
-{% block footer %}
-{% include "footer.html" %}
-{% endblock %}
+{% block footer %}{% include "footer.html" %}{% endblock %}
 
-{% block sidebar %}
-{% include "sidebar.html" %}
-{% endblock %}
+{% block sidebar %}{% include "sidebar.html" %}{% endblock %}

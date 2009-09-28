@@ -16,11 +16,13 @@ class Dashboard(webapp.RequestHandler):
         memcache.set(key='feeds', value=feeds, time=3600)
         planets = Planet.all().fetch(1000)
         memcache.set(key='planets', value=planets, time=3600)
+        requests = JoinRequest.all().fetch(1000)
         vars = {
                 'title': 'Dashboard - Planet Linux of Taiwan',
                 'categories': categories,
                 'feeds': feeds,
                 'planets': planets,
+                'requests': requests,
                 }
         self.response.out.write(template.render(path, vars))
     def post(self):

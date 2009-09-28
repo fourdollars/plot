@@ -1,10 +1,6 @@
 {% extends "layout.html" %}
 
-{% block title %} {{title}} {% endblock %}
-
-{% block header %}
-{% include "header.html" %}
-{% endblock %}
+{% block header %}{% include "header.html" %}{% endblock %}
 
 {% block content %}
 <script type="text/javascript"> $(function() { $("#tabs").tabs(); }); </script>
@@ -14,6 +10,7 @@
             <li><a href="#tabs-1">Planets</a></li>
             <li><a href="#tabs-2">Categories</a></li>
             <li><a href="#tabs-3">Feeds</a></li>
+            <li><a href="#tabs-4">JoinRequest</a></li>
         </ul>
         <div id="tabs-1">
             <dl>
@@ -73,14 +70,17 @@
                 </fieldset>
             </form>
         </div>
+        <div id="tabs-4">
+            <ul>
+                {% for request in requests %}
+                <li>{{ request.name }} - {{ request.feed }} - <img src="/avatar/{{ request.key }}"></li>
+                {% endfor %}
+            </ul>
+        </div>
     </div>
 </div>
 {% endblock %}
 
-{% block footer %}
-{% include "footer.html" %}
-{% endblock %}
+{% block footer %}{% include "footer.html" %}{% endblock %}
 
-{% block sidebar %}
-{% include "sidebar.html" %}
-{% endblock %}
+{% block sidebar %}{% include "sidebar.html" %}{% endblock %}

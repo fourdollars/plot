@@ -18,3 +18,8 @@ class Feed(db.Model):
 class Planet(db.Model):
     name = db.StringProperty(required=True)
     url = db.LinkProperty(required=True)
+
+class JoinRequest(db.Model):
+    name = db.StringProperty(required=True)
+    feed = db.LinkProperty(required=True)
+    avatar = db.BlobProperty()
