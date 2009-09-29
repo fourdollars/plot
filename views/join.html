@@ -6,9 +6,10 @@
 <div id="join">
     <form method="post" enctype="multipart/form-data" action="/join">
         <fieldset>
-            <label>Name</label> <input type="text" name="name">
-            <label>RSS/ATOM</label> <input type="text" name="feed">
-            <label>Avatar</label> <input type="file" name="avatar">
+            <label>Name</label> <input type="text" name="name"><br>
+            <label>Email</label> <input type="text" name="email"><br>
+            <label>RSS/ATOM</label> <input type="text" name="feed"><br>
+            <label>Avatar</label> <input type="file" name="avatar"><br>
             {{ captchahtml }}
         </fieldset>
     </form>

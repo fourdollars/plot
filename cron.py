@@ -8,11 +8,16 @@ from models.data import *
 class Cron(webapp.RequestHandler):
     def get(self, action):
         cron = self.request.headers.get('X-AppEngine-Cron')
-        #if cron is not None and cron == 'true':
-        if action == 'fetch':
-            self.fetch()
-        elif action == 'mail':
-            self.mail()
+        if cron is not None and cron == 'true':
+            if action == 'fetch':
+                self.fetch()
+            elif action == 'mail':
+                self.mail()
+        elif self.request.host == 'localhost:8080':
+            if action == 'fetch':
+                self.fetch()
+            elif action == 'mail':
+                self.mail()
     def fetch(self):
         feeds = Feed.all().order('created')
         count = feeds.count()

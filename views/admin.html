@@ -7,12 +7,26 @@
 <div class="dashboard">
     <div id="tabs">
         <ul>
-            <li><a href="#tabs-1">Planets</a></li>
-            <li><a href="#tabs-2">Categories</a></li>
-            <li><a href="#tabs-3">Feeds</a></li>
-            <li><a href="#tabs-4">JoinRequest</a></li>
+            <li><a href="#tabs-1">Configuration</a></li>
+            <li><a href="#tabs-2">Planets</a></li>
+            <li><a href="#tabs-3">Categories</a></li>
+            <li><a href="#tabs-4">Feeds</a></li>
+            <li><a href="#tabs-5">JoinRequest</a></li>
         </ul>
         <div id="tabs-1">
+            <form method="post" action="/admin">
+                <fieldset>
+                    <input type="hidden" name="type" value="config">
+                    <label>Name</label> <input type="text" name="name" value="{{config.name}}"> <br>
+                    <label>Public Key of reCaptcha</label>
+                    <input type="text" name="public_key" value="{{config.public_key}}"> <br>
+                    <label>Private Key of reCaptcha</label>
+                    <input type="text" name="private_key" value="{{config.public_key}}"> <br>
+                    <input type="submit">
+                </fieldset>
+            </form>
+        </div>
+        <div id="tabs-2">
             <dl>
                 {% for planet in planets %}
                 <dt>{{ planet.name }}</dt>
@@ -31,7 +45,7 @@
                 </fieldset>
             </form>
         </div>
-        <div id="tabs-2">
+        <div id="tabs-3">
             <ul>
                 {% for category in categories %}
                 <li>{{ category.name }}</li>
@@ -47,7 +61,7 @@
                 </fieldset>
             </form>
         </div>
-        <div id="tabs-3">
+        <div id="tabs-4">
             <ul>
                 {% for feed in feeds %}
                 <li>{{ feed.name }} - {{ feed.feed }} - {{ feed.category.name }}</li>
@@ -70,10 +84,10 @@
                 </fieldset>
             </form>
         </div>
-        <div id="tabs-4">
+        <div id="tabs-5">
             <ul>
                 {% for request in requests %}
-                <li>{{ request.name }} - {{ request.feed }} - <img src="/avatar/{{ request.key }}"></li>
+                <li>{{ request.name }} - {{ request.feed }} - <img src="/avatar/{{ request.key }}"> - {{ request.valid }}</li>
                 {% endfor %}
             </ul>
         </div>
