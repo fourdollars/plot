@@ -1,3 +1,4 @@
+#! /usr/bin/env python
 # -*- coding: utf-8 -*-
 from google.appengine.api import memcache
 from google.appengine.ext import db

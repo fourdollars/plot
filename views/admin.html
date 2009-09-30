@@ -14,9 +14,8 @@
             <li><a href="#tabs-5">JoinRequest</a></li>
         </ul>
         <div id="tabs-1">
-            <form method="post" action="/admin">
+            <form method="post" action="/admin/update/config">
                 <fieldset>
-                    <input type="hidden" name="type" value="config">
                     <label>Name</label> <input type="text" name="name" value="{{config.name}}"> <br>
                     <label>Public Key of reCaptcha</label>
                     <input type="text" name="public_key" value="{{config.public_key}}"> <br>
@@ -33,10 +32,8 @@
                 <dd>{{ planet.url }}</dd>
                 {% endfor %}
             </dl>
-            <form method="post" action="/admin">
+            <form method="post" action="/admin/create/planet">
                 <fieldset>
-                    <input type="hidden" name="type" value="planet">
-                    <input type="hidden" name="action" value="add">
                     <label>Name</label>
                     <input type="text" name="name">
                     <label>URL</label>
@@ -51,10 +48,8 @@
                 <li>{{ category.name }}</li>
                 {% endfor %}
             </ul>
-            <form method="post" action="/admin">
+            <form method="post" action="/admin/create/category">
                 <fieldset>
-                    <input type="hidden" name="type" value="category">
-                    <input type="hidden" name="action" value="add">
                     <label>Name</label>
                     <input type="text" name="name">
                     <input type="submit">
@@ -67,10 +62,8 @@
                 <li>{{ feed.name }} - {{ feed.feed }} - {{ feed.category.name }}</li>
                 {% endfor %}
             </ul>
-            <form method="post" action="/admin">
+            <form method="post" action="/admin/create/feed">
                 <fieldset>
-                    <input type="hidden" name="type" value="feed">
-                    <input type="hidden" name="action" value="add">
                     <label>Name</label>
                     <input type="text" name="name">
                     <label>ATOM/RSS Feed</label>

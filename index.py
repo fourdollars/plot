@@ -1,3 +1,4 @@
+#! /usr/bin/env python
 # -*- coding: utf-8 -*-
 import os
 from google.appengine.api import memcache,images,mail
