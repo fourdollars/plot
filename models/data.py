@@ -45,7 +45,7 @@ class Planet(db.Model):
                 memcache.set(key='planets', value=planets, time=3600)
         return planets
 
-class JoinRequest(db.Model):
+class Request(db.Model):
     name = db.StringProperty(required=True)
     feed = db.LinkProperty(required=True)
     avatar = db.BlobProperty()

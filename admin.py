@@ -14,7 +14,7 @@ class Dashboard(webapp.RequestHandler):
         feeds = Feed.getList()
         planets = Planet.getList()
         config = Config.getData()
-        requests = JoinRequest.all().fetch(1000)
+        requests = Request.all().fetch(1000)
         vars = {
                 'title': 'Dashboard - %s' % (config.name),
                 'categories': categories,
@@ -75,10 +75,9 @@ class Dashboard(webapp.RequestHandler):
         memcache.delete('feeds')
 
 application = webapp.WSGIApplication([
-                                         ('/admin', Dashboard),
-                                         ('/admin/(.*)/(.*)', Dashboard),
-                                     ],
-                                     debug=True)
+    ('/admin', Dashboard),
+    ('/admin/(.*)/(.*)', Dashboard),
+    ], debug=True)
 
 def main():
     run_wsgi_app(application)

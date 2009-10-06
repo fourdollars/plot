@@ -6,16 +6,11 @@ api_version: 1
 handlers:
 - url: /s
   static_dir: static
-- url: /admin
+- url: /admin.*
   script: admin.py
   login: admin
-- url: /admin/.*
-  script: admin.py
-  login: admin
-- url: /cron/.*
+- url: /cron.*
   script: cron.py
   login: admin
-- url: /avatar/.*
-  script: index.py
 - url: /.*
   script: index.py

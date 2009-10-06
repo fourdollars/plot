@@ -38,9 +38,9 @@ class Cron(webapp.RequestHandler):
     def mail(self):
         pass
 
-application = webapp.WSGIApplication(
-                                     [('/cron/(.*)', Cron)],
-                                     debug=True)
+application = webapp.WSGIApplication([
+    ('/cron/(.*)', Cron),
+    ], debug=True)
 
 def main():
     run_wsgi_app(application)
