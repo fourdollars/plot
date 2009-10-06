@@ -14,7 +14,7 @@
             <li><a href="#tabs-5">Request</a></li>
         </ul>
         <div id="tabs-1">
-            <form method="post" action="/admin/update/config">
+            <form method="post" action="/admin/config/update">
                 <fieldset>
                     <label>Name</label> <input type="text" name="name" value="{{config.name}}"> <br>
                     <label>Public Key of reCaptcha</label>
@@ -26,13 +26,23 @@
             </form>
         </div>
         <div id="tabs-2">
-            <dl>
+            {% if planets %}
+            <table>
+                <thead>
+                    <th>Name</th>
+                    <th>URL</th>
+                </thead>
+                <tbody>
                 {% for planet in planets %}
-                <dt>{{ planet.name }}</dt>
-                <dd>{{ planet.url }}</dd>
+                    <tr>
+                        <td>{{ planet.name }}</td>
+                        <td>{{ planet.url|urlize }}</td>
+                    </tr>
                 {% endfor %}
-            </dl>
-            <form method="post" action="/admin/create/planet">
+                </tbody>
+            </table>
+            {% endif %}
+            <form method="post" action="/admin/planet/create">
                 <fieldset>
                     <label>Name</label>
                     <input type="text" name="name">
@@ -43,12 +53,18 @@
             </form>
         </div>
         <div id="tabs-3">
-            <ul>
+            {% if categories %}
+            <table>
+                <tbody>
                 {% for category in categories %}
-                <li>{{ category.name }}</li>
+                    <tr>
+                        <td>{{ category.name }}</td>
+                    </tr>
                 {% endfor %}
-            </ul>
-            <form method="post" action="/admin/create/category">
+                </tbody>
+            </table>
+            {% endif %}
+            <form method="post" action="/admin/category/create">
                 <fieldset>
                     <label>Name</label>
                     <input type="text" name="name">
@@ -57,15 +73,36 @@
             </form>
         </div>
         <div id="tabs-4">
-            <ul>
+            {% if feeds %}
+            <table>
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Feed</th>
+                        <th>Email</th>
+                        <th>Avatar</th>
+                        <th>Category</th>
+                    </tr>
+                </thead>
+                <tbody>
                 {% for feed in feeds %}
-                <li>{{ feed.name }} - {{ feed.feed }} - {{ feed.category.name }}</li>
+                    <tr>
+                        <td>{{ feed.name }}</td>
+                        <td>{{ feed.feed|urlize }}</td>
+                        <td>{{ feed.email|urlize }}</td>
+                        <td><img src="/avatar/{{ feed.avatar.key }}"></td>
+                        <td>{{ feed.category.name }}</td>
+                    </tr>
                 {% endfor %}
-            </ul>
-            <form method="post" action="/admin/create/feed">
+                </tbody>
+            </table>
+            {% endif %}
+            <form method="post" action="/admin/feed/create">
                 <fieldset>
                     <label>Name</label>
                     <input type="text" name="name">
+                    <label>Email</label>
+                    <input type="text" name="email">
                     <label>ATOM/RSS Feed</label>
                     <input type="text" name="url">
                     <select name="category">
@@ -78,11 +115,32 @@
             </form>
         </div>
         <div id="tabs-5">
-            <ul>
+            {% if requests %}
+            <table>
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Feed</th>
+                        <th>Email</th>
+                        <th>Avatar</th>
+                        <th>Valid</th>
+                        <th>Apply</th>
+                    </tr>
+                </thead>
+                <tbody>
                 {% for request in requests %}
-                <li>{{ request.name }} - {{ request.feed }} - <img src="/avatar/{{ request.key }}"> - {{ request.valid }}</li>
+                    <tr>
+                        <td>{{ request.name }}</td>
+                        <td>{{ request.feed|urlize }}</td>
+                        <td>{{ request.email|urlize }}</td>
+                        <td><img src="/avatar/{{ request.avatar.key }}"></td>
+                        <td>{{ request.valid }}</td>
+                        <td><a href="/admin/request/apply/{{ request.key }}">Apply</a></td>
+                    </tr>
                 {% endfor %}
-            </ul>
+                </tbody>
+            </table>
+            {% endif %}
         </div>
     </div>
 </div>

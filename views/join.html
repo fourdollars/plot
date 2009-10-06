@@ -10,6 +10,12 @@
             <label>Email</label> <input type="text" name="email"><br>
             <label>RSS/ATOM</label> <input type="text" name="feed"><br>
             <label>Avatar</label> <input type="file" name="avatar"><br>
+            <label>Category</label>
+            <select name="category">
+                {% for category in categories %}
+                <option value="{{category.name}}">{{category.name|capfirst}}</option>
+                {% endfor %}
+            </select>
             <input type="submit"><br>
             {{ captchahtml }}
         </fieldset>

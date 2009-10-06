@@ -54,19 +54,23 @@ class Join(webapp.RequestHandler):
         if self.request.host == 'localhost:8080':
             name = self.request.get('name')
             feed = self.request.get('feed')
-            avatar = self.request.get('avatar')
+            data = self.request.get('avatar')
             email = self.request.get('email')
-            image = images.Image(avatar)
+            category = self.request.get('category')
+            image = images.Image(data)
             image.im_feeling_lucky()
             if image.width > 100 or image.height > 100:
                 image.resize(width=100, height=100)
+            avatar = Avatar(data=image.execute_transforms(output_encoding=images.PNG))
+            avatar.put()
             join = Request(
                     name=name,
                     feed=feed,
                     email=email,
                     remoteip=remoteip,
+                    category=category,
                     valid=True,
-                    avatar=image.execute_transforms(output_encoding=images.PNG))
+                    avatar=avatar)
             join.put()
             self.redirect('/join')
             return
@@ -79,18 +83,22 @@ class Join(webapp.RequestHandler):
             try:
                 name = self.request.get('name')
                 feed = self.request.get('feed')
-                avatar = self.request.get('avatar')
+                data = self.request.get('avatar')
                 email = self.request.get('email')
-                image = images.Image(avatar)
+                category = self.request.get('category')
+                image = images.Image(data)
                 image.im_feeling_lucky()
                 if image.width > 100 or image.height > 100:
                     image.resize(width=100, height=100)
+                avatar = Avatar(data=image.execute_transforms(output_encoding=images.PNG))
+                avatar.put()
                 join = Request(
                         name=name,
                         feed=feed,
                         email=email,
                         remoteip=remoteip,
-                        avatar=image.execute_transforms(output_encoding=images.PNG))
+                        category=category,
+                        avatar=avatar)
                 join.put()
                 categories = Category.getList()
                 feeds = Feed.getList()
@@ -116,11 +124,12 @@ class Join(webapp.RequestHandler):
         else:
             self.redirect('/join')
 
-class Avatar(webapp.RequestHandler):
-    def get(self, key_name):
-        request = Request.get(key_name)
-        self.response.headers['Content-Type'] = 'image/png'
-        self.response.out.write(request.avatar)
+class AvatarController(webapp.RequestHandler):
+    def get(self, key):
+        avatar = Avatar.get(key)
+        if avatar is not None:
+            self.response.headers['Content-Type'] = 'image/png'
+            self.response.out.write(avatar.data)
 
 class Validate(webapp.RequestHandler):
     def get(self, key_name):
@@ -148,7 +157,7 @@ application = webapp.WSGIApplication([
     ('/', MainPage),
     ('/join', Join),
     ('/category/(.*)', MainPage),
-    ('/avatar/(.*)', Avatar),
+    ('/avatar/(.*)', AvatarController),
     ('/validate/(.*)', Validate),
     ], debug=True)
 

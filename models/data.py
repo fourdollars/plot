@@ -6,6 +6,9 @@ from google.appengine.ext import db
 class Counter(db.Model):
     count = db.IntegerProperty(required=True)
 
+class Avatar(db.Model):
+    data = db.BlobProperty(required=True)
+
 class Category(db.Model):
     name = db.StringProperty(required=True)
     @classmethod
@@ -22,8 +25,10 @@ class Feed(db.Model):
     feed = db.LinkProperty(required=True)
     title = db.StringProperty(default=None)
     url = db.LinkProperty(default=None)
+    email = db.EmailProperty(required=True)
     category = db.ReferenceProperty(Category, collection_name='feeds', required=True)
     created = db.DateTimeProperty(auto_now_add=True)
+    avatar = db.ReferenceProperty(Avatar, required=True)
     @classmethod
     def getList(cls):
         feeds = memcache.get('feeds')
@@ -48,10 +53,11 @@ class Planet(db.Model):
 class Request(db.Model):
     name = db.StringProperty(required=True)
     feed = db.LinkProperty(required=True)
-    avatar = db.BlobProperty()
     email = db.EmailProperty(required=True)
     remoteip = db.StringProperty(required=True)
+    category = db.StringProperty(required=True)
     valid = db.BooleanProperty(default=False)
+    avatar = db.ReferenceProperty(Avatar, required=True)
 
 class Config(db.Model):
     url = db.LinkProperty()

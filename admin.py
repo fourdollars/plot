@@ -9,7 +9,11 @@ from google.appengine.ext.webapp.util import run_wsgi_app
 from models.data import *
 
 class Dashboard(webapp.RequestHandler):
-    def get(self):
+    def get(self, controller=None, action=None, id=None):
+        if controller == 'request':
+            self.request_controller(action, id)
+            self.redirect('/admin')
+            return
         categories = Category.getList()
         feeds = Feed.getList()
         planets = Planet.getList()
@@ -25,15 +29,17 @@ class Dashboard(webapp.RequestHandler):
                 }
         path = os.path.join(os.path.dirname(__file__), 'views/admin.html')
         self.response.out.write(template.render(path, vars))
-    def post(self, action, id):
-        if id == 'config':
+    def post(self, controller=None, action=None, id=None):
+        if controller == 'config':
             self.config(action)
-        elif id == 'planet':
+        elif controller == 'planet':
             self.planet(action)
-        elif id == 'category':
+        elif controller == 'category':
             self.category(action)
-        elif id == 'feed':
+        elif controller == 'feed':
             self.feed(action)
+        elif controller == 'request':
+            self.request(action)
         self.redirect('/admin')
     def config(self, action):
         name = self.request.get('name')
@@ -63,6 +69,7 @@ class Dashboard(webapp.RequestHandler):
     def feed(self, action):
         name = self.request.get('name')
         url = self.request.get('url')
+        email = self.request.get('email')
         category = self.request.get('category')
         if name is None or url is None or category is None:
             return
@@ -70,12 +77,22 @@ class Dashboard(webapp.RequestHandler):
         parent = query.filter('name =', category).get()
         if parent is None:
             return
-        feed = Feed(name=name, feed=url, category=parent)
+        feed = Feed(name=name, feed=url, category=parent, email=email)
         feed.put()
         memcache.delete('feeds')
+    def request_controller(self, action, id):
+        if action == 'apply':
+            request = Request.get(id)
+            query = Category.all()
+            parent = query.filter('name =', request.category).get()
+            feed = Feed(name=request.name, feed=request.feed, category=parent, email=request.email, avatar=request.avatar)
+            feed.put()
+            memcache.delete('feeds')
+            request.delete()
 
 application = webapp.WSGIApplication([
     ('/admin', Dashboard),
+    ('/admin/(.*)/(.*)/(.*)', Dashboard),
     ('/admin/(.*)/(.*)', Dashboard),
     ], debug=True)
 

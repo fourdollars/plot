@@ -12,6 +12,14 @@ div.daygroup, div.dashboard {
     margin: 20px;
 }
 
+div.dashboard table {
+    width:100%;
+}
+
+div.dashboard table,th,tr,td {
+    border: 1px solid gray;
+}
+
 h2.date {
     font-weight: bold;
     color: gray;
