@@ -125,6 +125,7 @@
                         <th>Avatar</th>
                         <th>Valid</th>
                         <th>Apply</th>
+                        <th>Reject</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -134,8 +135,9 @@
                         <td>{{ request.feed|urlize }}</td>
                         <td>{{ request.email|urlize }}</td>
                         <td><img src="/avatar/{{ request.avatar.key }}"></td>
-                        <td>{{ request.valid }}</td>
-                        <td><a href="/admin/request/apply/{{ request.key }}">Apply</a></td>
+                        <td>{% if request.valid %}O{% else %}X{% endif %}</td>
+                        <td><a href="/admin/request/apply/{{ request.key }}">O</a></td>
+                        <td><a href="/admin/request/reject/{{ request.key }}">X</a></td>
                     </tr>
                 {% endfor %}
                 </tbody>

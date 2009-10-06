@@ -89,6 +89,10 @@ class Dashboard(webapp.RequestHandler):
             feed.put()
             memcache.delete('feeds')
             request.delete()
+        elif action == 'reject':
+            request = Request.get(id)
+            request.avatar.delete()
+            request.delete()
 
 application = webapp.WSGIApplication([
     ('/admin', Dashboard),
